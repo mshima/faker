@@ -19,5 +19,15 @@ describe('locale imports', () => {
       expect(faker).toBeDefined();
       expect(faker.locale).toBe(locale);
     });
+
+    it(`should be possible to directly require('@faker-js/faker/locales/${locale}')`, () => {
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      const exportedLocale = require(`@faker-js/faker/locales/${locale}`);
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      const internalLocale = require(`../dist/cjs/locales/${locale}`);
+
+      expect(exportedLocale).toBeDefined();
+      expect(exportedLocale).toBe(internalLocale);
+    });
   }
 });
