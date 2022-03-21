@@ -45,7 +45,7 @@ buildSync({
     ...Object.keys(locales)
       .map((locale) => [
         `./src/locale/${locale}.ts`,
-        `./src/locales/${locale}/index.ts`
+        `./src/locales/${locale}/index.ts`,
       ])
       .flat(),
     './src/iban.ts',
