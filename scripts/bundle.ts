@@ -42,7 +42,12 @@ console.log('Building dist for node type=module (esm)...');
 buildSync({
   entryPoints: [
     './src/index.ts',
-    ...Object.keys(locales).map((locale) => [`./src/locale/${locale}.ts`, `./src/locales/${locale}/index.ts`]).flat(),
+    ...Object.keys(locales)
+      .map((locale) => [
+        `./src/locale/${locale}.ts`,
+        `./src/locales/${locale}/index.ts`
+      ])
+      .flat(),
     './src/iban.ts',
     './src/mersenne.ts',
   ],
