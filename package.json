@@ -28,22 +28,33 @@
     ">=4.0": {
       "*": [
         "dist/types/*"
+      ],
+      "locales/*": [
+        "dist/types/locales/*/index.d.ts"
       ]
     }
   },
   "exports": {
     ".": {
-      "node": "./dist/cjs/index.js",
+      "require": "./dist/cjs/index.js",
       "es2015": "./dist/esm/index.js",
       "default": "./dist/esm/index.js"
     },
+    "./faker": {
+      "require": "./dist/cjs/faker.js"
+    },
     "./locale/*": {
-      "node": "./dist/cjs/locale/*.js",
+      "require": "./dist/cjs/locale/*.js",
       "es2015": "./dist/esm/locale/*.js",
       "default": "./dist/esm/locale/*.js"
     },
+    "./locales": {
+      "require": "./dist/cjs/locales/index.js",
+      "es2015": "./dist/esm/locales/index.js",
+      "default": "./dist/esm/locales/index.js"
+    },
     "./locales/*": {
-      "node": "./dist/cjs/locales/*/index.js",
+      "require": "./dist/cjs/locales/*/index.js",
       "es2015": "./dist/esm/locales/*/index.js",
       "default": "./dist/esm/locales/*/index.js"
     },
@@ -73,8 +84,8 @@
     "docs:serve": "vitepress serve docs",
     "format": "prettier --write .",
     "lint": "eslint --cache --cache-strategy content .",
-    "test": "vitest",
-    "coverage": "vitest run --coverage",
+    "test": "vitest --globals",
+    "coverage": "vitest run --coverage --globals",
     "cypress": "cypress",
     "docs:test:e2e:ci": "run-s docs:build:ci docs:test:e2e:run",
     "docs:test:e2e:run": "run-p --race docs:serve \"cypress run\"",

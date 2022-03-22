@@ -1,21 +1,14 @@
-import { describe, expect, it } from 'vitest';
-import allLocales from '../src/locales';
+/* eslint-disable no-undef */
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const allLocales = require('@faker-js/faker/locales');
+console.log(allLocales);
+console.log(require('@faker-js/faker/locale/en'));
 
 describe('locale imports', () => {
-  for (const locale in allLocales) {
+  for (const locale of Object.keys(allLocales)) {
     it(`should be possible to directly require('@faker-js/faker/locale/${locale}')`, () => {
       // eslint-disable-next-line @typescript-eslint/no-var-requires
-      const exportedFaker = require(`@faker-js/faker/locale/${locale}`);
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      const distFaker = require(`../dist/cjs/locale/${locale}`);
-
-      expect(exportedFaker).toBeDefined();
-      expect(exportedFaker).toBe(distFaker);
-      expect(exportedFaker.locale).toBe(locale);
-    });
-
-    it(`should be possible to directly import('@faker-js/faker/locale/${locale}')`, async () => {
-      const faker = (await import(`../dist/esm/locale/${locale}`)).default;
+      const faker = require(`../dist/cjs/locale/${locale}`);
 
       expect(faker).toBeDefined();
       expect(faker.locale).toBe(locale);

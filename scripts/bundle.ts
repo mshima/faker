@@ -1,23 +1,34 @@
 import { buildSync } from 'esbuild';
 import { sync as globSync } from 'glob';
-import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync } from 'node:fs';
 import locales from '../src/locales';
 
 console.log('Building dist for node (cjs)...');
 
-// Generate entry-points for cjs compatibility
-const localeDir = 'locale';
-if (existsSync(localeDir)) {
-  rmSync(localeDir, { recursive: true, force: true });
+// Generate esm package.json at dist/esm
+mkdirSync('dist/esm', { recursive: true });
+writeFileSync(
+  'dist/esm/package.json',
+  `{
+  "type": "module"
 }
-mkdirSync(localeDir);
-for (const locale of Object.keys(locales)) {
-  writeFileSync(
-    `${localeDir}/${locale}.js`,
-    `module.exports = require('../dist/cjs/locale/${locale}');\n`,
-    { encoding: 'utf8' }
-  );
-}
+
+`,
+  { encoding: 'utf8' }
+);
+
+const entryPoints = [
+  './src/index.ts',
+  ...Object.keys(locales)
+    .map((locale) => [
+      `./src/locale/${locale}.ts`,
+      `./src/locales/${locale}/index.ts`,
+    ])
+    .flat(),
+  './src/locales/index.ts',
+  './src/iban.ts',
+  './src/mersenne.ts',
+];
 
 buildSync({
   entryPoints: globSync('./src/**/*.ts'),
@@ -29,28 +40,12 @@ buildSync({
   //   './src/mersenne.ts',
   // ],
   outdir: './dist/cjs',
-  bundle: false, // Creates 390MiB bundle ...
-  sourcemap: false,
-  minify: true,
-  // splitting: true, // Doesn't work with cjs
   format: 'cjs',
-  platform: 'node',
-  target: 'node12',
 });
 
 console.log('Building dist for node type=module (esm)...');
 buildSync({
-  entryPoints: [
-    './src/index.ts',
-    ...Object.keys(locales)
-      .map((locale) => [
-        `./src/locale/${locale}.ts`,
-        `./src/locales/${locale}/index.ts`,
-      ])
-      .flat(),
-    './src/iban.ts',
-    './src/mersenne.ts',
-  ],
+  entryPoints,
   outdir: './dist/esm',
   bundle: true,
   sourcemap: false,
