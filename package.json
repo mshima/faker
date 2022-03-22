@@ -42,6 +42,11 @@
       "es2015": "./dist/esm/locale/*.js",
       "default": "./dist/esm/locale/*.js"
     },
+    "./locales/*": {
+      "node": "./locales/*.js",
+      "es2015": "./dist/esm/locales/*/index.js",
+      "default": "./dist/esm/locales/*/index.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [
@@ -49,6 +54,7 @@
     "CHANGELOG_old.md",
     "dist",
     "locale",
+    "locales",
     "tsconfig.json"
   ],
   "scripts": {
