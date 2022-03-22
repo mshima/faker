@@ -1,0 +1,1 @@
+import{a,b as c}from"../chunk-4VWJ3OYL.js";import{a as o,b as f}from"../chunk-UZSWOH4X.js";import"../chunk-R2THYESO.js";import"../chunk-FZMYB7KY.js";import{a as r,b as m}from"../chunk-MR3QKY36.js";import{b as l}from"../chunk-3BHSLLHA.js";var n=l((s,e)=>{f();c();m();var t=new o({locale:"af_ZA",localeFallback:"en",locales:{af_ZA:a,en:r}});e.exports=t});export default n();
