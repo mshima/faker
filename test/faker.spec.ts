@@ -20,7 +20,7 @@ describe('faker', () => {
 
     const file: unknown = await import('..');
     expect(file).toBeDefined();
-    expect(file.Faker).toBe(Faker);
+    expect(file.foo).toBe(Faker);
 
     new Faker({ locale: { metadata: { title: '' } } });
 
