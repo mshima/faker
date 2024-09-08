@@ -38,7 +38,7 @@
       ".": [
         "./dist/index.d.ts"
       ],
-      "locale": [
+      "locale/*": [
         "./dist/locale/*.d.ts"
       ]
     }
