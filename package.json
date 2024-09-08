@@ -33,13 +33,6 @@
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "types": "dist/index.d.cts",
-    "typesVersions": {
-    ">=5.0": {
-      "*": [
-        "dist/types/*"
-      ]
-    }
-  },
   "exports": {
     ".": {
       "require": {
