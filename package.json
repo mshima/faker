@@ -88,18 +88,11 @@
   },
   "main": "dist/index.cjs",
   "module": "dist/index.js",
+  "types": "dist/index.d.cts",
   "typesVersions": {
     ">=5.0": {
-      ".": {
-        "require": [
-          "./dist/index.d.cts"
-        ],
-        "default": [
-          "./dist/index.d.ts"
-        ]
-      }
       "locale/*": [
-        "./dist/locale/*.d.ts"
+        "./dist/locale/*.d.cts"
       ]
     }
   },
