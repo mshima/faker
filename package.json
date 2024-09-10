@@ -91,9 +91,6 @@
   "types": "dist/index.d.ts",
   "typesVersions": {
     ">=5.0": {
-      ".": [
-        "./dist/index.d.ts"
-      ],
       "locale/*": [
         "./dist/locale/*.d.ts"
       ]
